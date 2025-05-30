@@ -5,6 +5,8 @@ import * as apigateway from "aws-cdk-lib/aws-apigateway";
 import * as path from "path";
 import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
 import { DynamoDBClient, PutItemCommand } from "@aws-sdk/client-dynamodb";
+import * as stackConfig from './config/stack-config';
+
 // import * as sqs from 'aws-cdk-lib/aws-sqs';
 
 export class BackendStack extends cdk.Stack {

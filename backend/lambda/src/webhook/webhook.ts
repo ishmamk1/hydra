@@ -1,5 +1,9 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 
+const headers = {
+    'Content-Type': 'application/json'
+}
+
 export const handler = async (
   event: APIGatewayProxyEvent
 ): Promise<APIGatewayProxyResult> => {
@@ -13,8 +17,6 @@ export const handler = async (
       message: 'webhook recieved',
       data: parsed_payload,
     }, null, 2),
-    headers: {
-      'Content-Type': 'application/json'
-    }
+    headers: headers
   };
 };

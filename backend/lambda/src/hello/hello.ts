@@ -1,5 +1,9 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 
+const headers = {
+  'Content-Type': 'application/json'
+};
+
 export const handler = async (
   event: APIGatewayProxyEvent
 ): Promise<APIGatewayProxyResult> => {
@@ -8,8 +12,6 @@ export const handler = async (
     body: JSON.stringify({
       message: 'Hello from Lambda!'
     }),
-    headers: {
-      'Content-Type': 'application/json'
-    }
+    headers: headers
   };
 };
