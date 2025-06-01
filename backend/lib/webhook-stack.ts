@@ -4,18 +4,24 @@ import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as apigateway from 'aws-cdk-lib/aws-apigateway';
 import * as path from 'path';
 import * as stackConfig from './config/stack-config';
+import * as sqs from 'aws-cdk-lib/aws-sqs';
+
+interface WebhookStackProps extends cdk.StackProps {
+    webhookQueue: sqs.Queue;
+}
 
 export class WebhookStack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+  constructor(scope: Construct, id: string, props: WebhookStackProps) {
     super(scope, id, props);
 
-    // Configurable params
     const apiName = 'webhook';
     const lambdaHandler = 'webhook.handler';
     const lambdaRuntime = lambda.Runtime.NODEJS_22_X;
     const lambdaCodePath = path.join(__dirname, '../lambda/dist');
     const lambdaFunctionName = 'WebhookReceiverFunction';
     const webhookPath = 'webhook';
+
+    const queue = props.webhookQueue;
 
     const api = new apigateway.RestApi(this, 'WebhookAPI', {
       restApiName: apiName,

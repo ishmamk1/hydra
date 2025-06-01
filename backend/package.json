@@ -21,10 +21,13 @@
     "typescript": "~5.6.3"
   },
   "dependencies": {
+    "@aws-cdk/aws-sqs": "^1.203.0",
     "@aws-sdk/client-dynamodb": "^3.817.0",
+    "@aws-sdk/client-sqs": "^3.821.0",
     "@types/puppeteer": "^5.4.7",
     "aws-cdk-lib": "2.196.0",
     "constructs": "^10.0.0",
+    "dotenv": "^16.5.0",
     "puppeteer": "^24.9.0"
   }
 }
