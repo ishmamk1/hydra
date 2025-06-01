@@ -6,11 +6,11 @@ const headers = {
 };
 
 const sqs_client = new SQSClient({
-  region: "us-east-1",
-  endpoint: "http://host.docker.internal:4566",
+  region: process.env.AWS_REGION,
+  endpoint: process.env.AWS_ENDPOINT,
   credentials: {
-    accessKeyId: "test",
-    secretAccessKey: "test"
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
   }
 })
 
@@ -19,7 +19,7 @@ export const handler = async (
 ): Promise<APIGatewayProxyResult> => {
 
   await sqs_client.send(new SendMessageCommand({
-    QueueUrl: "http://localhost:4566/000000000000/webhook-queue",
+    QueueUrl: process.env.QUEUE_URL,
     MessageBody: JSON.stringify({ event: "test"}),
   }));
 

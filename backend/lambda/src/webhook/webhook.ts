@@ -24,31 +24,32 @@ export const handler = async (
 
   // TODO: add possible filtering and extra stuff
   try {
-    const body = event.body ? JSON.parse(event.body) : null;
-    console.log(body);
+      const body = event.body ? JSON.parse(event.body) : null;
+      console.log(body);
 
-    if (body) {
-      await sqs_client.send(new SendMessageCommand({
-        QueueUrl: "http://localhost:4566/000000000000/webhook-queue",
-        MessageBody: JSON.stringify(body),
-      }));
-    }
+      if (body) {
+        await sqs_client.send(new SendMessageCommand({
+          QueueUrl: process.env.QUEUE_URL,
+          MessageBody: JSON.stringify(body),
+        }));
+      }
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify({
-        message: 'webhook recieved',
-        data: body,
-      }, null, 2),
-      headers: headers
-    };
+      return {
+        statusCode: 200,
+        body: JSON.stringify({
+          message: 'webhook recieved',
+          data: body,
+        }, null, 2),
+        headers: headers
+      };
+
   } catch (error) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({
-        message: "Internal Server Error",
-        error: error instanceof Error ? error.message : String(error),
-      })
-    }
+      return {
+        statusCode: 500,
+        body: JSON.stringify({
+          message: "Internal Server Error",
+          error: error instanceof Error ? error.message : String(error),
+        })
+      }
   }
 };

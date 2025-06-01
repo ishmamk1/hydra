@@ -1,0 +1,5 @@
+**/.env
+**/node_modules
+backend/lambda/dist/package-lock.json
+backend/lambda/dist/package.json
+backend/.localstack
