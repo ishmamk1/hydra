@@ -4,7 +4,6 @@ import * as lambda from "aws-cdk-lib/aws-lambda";
 import * as apigateway from "aws-cdk-lib/aws-apigateway";
 import * as path from "path";
 import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
-import * as sqs from 'aws-cdk-lib/aws-sqs';
 
 export class BackendStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -27,8 +26,5 @@ export class BackendStack extends cdk.Stack {
       // WEBHOOK Endpoint
       const webhook = apiGateway.root.addResource('webhook');
       webhook.addMethod('GET', new apigateway.LambdaIntegration(pullRequestWebhookHandler));
-
-      // CREATE DDB INSTANCE
-
   }
 };

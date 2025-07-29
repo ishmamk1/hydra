@@ -3,5 +3,5 @@
 backend/lambda/dist/package-lock.json
 backend/lambda/dist/package.json
 backend/.localstack
-
 backend/env
+backend/dist
