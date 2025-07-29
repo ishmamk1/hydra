@@ -9,6 +9,26 @@ import * as sqs from 'aws-cdk-lib/aws-sqs';
 export class BackendStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
-    
+
+      // Create API GATEWAY
+      const apiGateway = new apigateway.RestApi(this, "WebhookAPI", {
+        restApiName: "WebhookAPI",
+        description: "API Gateway to establish Github Webhook connection to Hydra"
+      })
+
+      // CREATE LAMBDA INSTANCE
+      const pullRequestWebhookHandler = new lambda.Function(this, "PullRequestWebhook", {
+        runtime: lambda.Runtime.NODEJS_18_X,
+        handler: "pullRequestWebhook.handler",
+        code: lambda.Code.fromAsset(path.join("dist")),
+        timeout: cdk.Duration.minutes(15)
+      });
+
+      // WEBHOOK Endpoint
+      const webhook = apiGateway.root.addResource('webhook');
+      webhook.addMethod('GET', new apigateway.LambdaIntegration(pullRequestWebhookHandler));
+
+      // CREATE DDB INSTANCE
+
   }
 };
