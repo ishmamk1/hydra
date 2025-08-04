@@ -25,6 +25,6 @@ export class BackendStack extends cdk.Stack {
 
       // WEBHOOK Endpoint
       const webhook = apiGateway.root.addResource('webhook');
-      webhook.addMethod('GET', new apigateway.LambdaIntegration(pullRequestWebhookHandler));
+      webhook.addMethod('POST', new apigateway.LambdaIntegration(pullRequestWebhookHandler));
   }
 };
