@@ -5,3 +5,8 @@ backend/lambda/dist/package.json
 backend/.localstack
 backend/env
 backend/dist
+
+infrastructure/.terraform
+infrastructure/.terraform.lock.hcl
+infrastructure/.terraform.tfstate.lock.info
+infrastructure/terraform.tfstate
